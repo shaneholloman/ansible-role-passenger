@@ -1,6 +1,6 @@
 # Ansible Role: Passenger
 
-[![CI](https://github.com/shaneholloman-org/ansible-role-passenger/actions/workflows/ci.yml/badge.svg)](https://github.com/shaneholloman-org/ansible-role-passenger/actions/workflows/ci.yml)
+[![CI](https://github.com/shaneholloman/ansible-role-passenger/actions/workflows/ci.yml/badge.svg)](https://github.com/shaneholloman/ansible-role-passenger/actions/workflows/ci.yml)
 
 Installs Passenger (with Nginx) on RedHat/CentOS (soon) or Debian/Ubuntu linux servers.
 
@@ -53,4 +53,3 @@ MIT / BSD
 ## Author Information
 
 This role was created in 2023
-

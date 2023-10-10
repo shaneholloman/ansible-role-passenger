@@ -1,3 +1,5 @@
 ---
-- src: shaneholloman.ruby
-- src: shaneholloman.nodejs
+- name: shaneholloman.ruby
+  src: https://github.com/shaneholloman/ansible-role-ruby
+- name: shaneholloman.nodejs
+  src: https://github.com/shaneholloman/ansible-role-nodejs
