@@ -1,5 +1,4 @@
 ---
-nodejs_version: "16.x"
 
 passenger_server_name: www.example.com
 passenger_app_root: /opt/example/public

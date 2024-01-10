@@ -15,10 +15,24 @@
     id: 561F9B9CAC40B2F7
     state: present
 
-- name: Add apt HTTPS capabilities.
+- name: Update apt cache.
   ansible.builtin.apt:
-    name: apt-transport-https
+    update_cache: true
+    cache_valid_time: 600
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure build dependencies are installed (Debian).
+  ansible.builtin.apt:
+    name: "{{ item }}"
     state: present
+  loop:
+    - build-essential
+    - apt-transport-https
+    - curl
+    - dirmngr
+    - gnupg
+    - ca-certificates
+  when: ansible_os_family == 'Debian'
 
 - name: Add Phusion apt repo.
   ansible.builtin.apt_repository:
