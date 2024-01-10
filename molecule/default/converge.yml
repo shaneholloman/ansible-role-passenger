@@ -16,11 +16,11 @@
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
+      ansible.builtin.apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
     - name: Ensure build dependencies are installed (Debian).
-      apt:
+      ansible.builtin.apt:
         name:
           - build-essential
           - apt-transport-https
@@ -35,7 +35,7 @@
 
   tasks:
     - name: Install rails dependencies.
-      apt:
+      ansible.builtin.apt:
         name:
           - zlib1g-dev
           - libsqlite3-dev
@@ -44,31 +44,31 @@
         state: present
 
     - name: Check if Rails is already present.
-      command: which rails
+      ansible.builtin.command: which rails
       register: rails_result
       changed_when: false
       failed_when: false
 
     - name: Install rails.
-      command: gem install rails --no-document
+      ansible.builtin.command: gem install rails --no-document
       when: rails_result.rc != 0
 
     - name: Check if Rails app exists.
-      stat: "path={{ passenger_app_root }}"
+      ansible.builtin.stat: "path={{ passenger_app_root }}"
       register: rails_app
 
     - name: Create Rails demo app if it doesn't yet exist.
-      command: "rails new demo --skip-git --skip-javascript chdir=/opt"
+      ansible.builtin.command: "rails new demo --skip-git --skip-javascript chdir=/opt"
       when: not rails_app.stat.exists
 
     - name: Set correct permissions on demo app.
-      file:  # noqa 208
+      ansible.builtin.file:  # noqa risky-file-permissions
         path: /opt/demo
         owner: "{{ nginx_user }}"
         group: "{{ nginx_user }}"
         state: directory
         recurse: true
-      notify: restart nginx
+      notify: Restart nginx
 
   post_tasks:
     - name: Ensure Rails demo app is accessible.
